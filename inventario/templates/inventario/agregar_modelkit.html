@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agregar Model Kit</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Roboto', sans-serif;
+            min-height:100vh;
+            background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            color:white;
+            padding:40px;
+        }
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #f1c40f;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#f1c40f;
+            transform:translateY(-2px);
+        }
+
+        .container{
+            max-width:800px;
+            margin:auto;
+        }
+
+        .form-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:40px;
+            border:2px solid rgba(255,255,255,0.1);
+            box-shadow:0 0 30px rgba(0,0,0,0.35);
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:2.5rem;
+            margin-bottom:15px;
+        }
+
+        .title span{
+            color:#f1c40f;
+        }
+
+        .subtitle{
+            color:#dfe6e9;
+            margin-bottom:35px;
+        }
+
+        .form-group{
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:10px;
+            font-weight:500;
+            color:#f1c40f;
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:rgba(255,255,255,0.12);
+            color:white;
+            font-size:1rem;
+            outline:none;
+            border:2px solid transparent;
+            transition:0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus{
+            border-color:#f1c40f;
+            background:rgba(255,255,255,0.18);
+        }
+
+        textarea{
+            resize:vertical;
+            min-height:120px;
+        }
+
+        .buttons{
+            display:flex;
+            gap:20px;
+            margin-top:35px;
+        }
+
+        .btn{
+            padding:14px 24px;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:bold;
+            text-decoration:none;
+            transition:0.3s ease;
+            font-size:1rem;
+        }
+
+        .btn-save{
+            background:#e63946;
+            color:white;
+            box-shadow:0 0 15px rgba(230,57,70,0.4);
+        }
+
+        .btn-save:hover{
+            transform:translateY(-3px);
+            background:#ff4d5a;
+        }
+
+        .btn-cancel{
+            background:transparent;
+            border:2px solid #f1c40f;
+            color:#f1c40f;
+        }
+
+        .btn-cancel:hover{
+            background:#f1c40f;
+            color:#0d1b2a;
+            transform:translateY(-3px);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .buttons{
+                flex-direction:column;
+            }
+
+            .title{
+                font-size:2rem;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            RX-78 <span>MODEL KIT</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="/">Inicio</a>
+
+            <a href="/modelkits/">
+                Inventario
+            </a>
+
+            <a href="/admin/">
+                Admin
+            </a>
+
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <div class="form-card">
+
+            <h1 class="title">
+                Agregar <span>Model Kit</span>
+            </h1>
+
+            <p class="subtitle">
+                Registra un nuevo Gunpla en el inventario inspirado en el RX-78-2.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="id_nombre">
+                        Nombre
+                    </label>
+
+                    {{ form.nombre }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="id_descripcion">
+                        Descripción
+                    </label>
+
+                    {{ form.descripcion }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="id_grado">
+                        Grado
+                    </label>
+
+                    {{ form.grado }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="id_escala">
+                        Escala
+                    </label>
+
+                    {{ form.escala }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="id_precio">
+                        Precio
+                    </label>
+
+                    {{ form.precio }}
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="id_cantidad">
+                        Cantidad
+                    </label>
+
+                    {{ form.cantidad }}
+
+                </div>
+
+                <div class="buttons">
+
+                    <button type="submit" class="btn btn-save">
+                        Guardar Model Kit
+                    </button>
+
+                    <a href="/" class="btn btn-cancel">
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

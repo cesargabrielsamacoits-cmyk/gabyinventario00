@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario Model Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+      border-bottom: 3px solid #f1c40f;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #e63946;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #f1c40f;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 8%;
+      min-height: calc(100vh - 90px);
+      gap: 40px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .hero-text h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .hero-text h1 span {
+      color: #f1c40f;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #dfe6e9;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: #e63946;
+      color: white;
+      box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background-color: #ff4d5a;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid #f1c40f;
+      color: #f1c40f;
+    }
+
+    .btn-secondary:hover {
+      background-color: #f1c40f;
+      color: #0d1b2a;
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .gundam-card {
+      width: 350px;
+      height: 450px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 35px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gundam-card::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: #f1c40f;
+      opacity: 0.25;
+      border-radius: 50%;
+    }
+
+    .gundam-card::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 180px;
+      height: 180px;
+      background: #e63946;
+      opacity: 0.25;
+      border-radius: 50%;
+    }
+
+    .rx-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #f1c40f;
+      margin-bottom: 15px;
+      z-index: 1;
+    }
+
+    .rx-specs {
+      z-index: 1;
+      text-align: center;
+      line-height: 1.8;
+      color: #ecf0f1;
+    }
+
+    .rx-specs strong {
+      color: #ffffff;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.2);
+      color: #dfe6e9;
+      border-top: 2px solid rgba(255,255,255,0.1);
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 50px;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">RX-78 <span>MODEL KIT</span></div>
+
+    <nav class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="{% url 'modelkit_list' %}">Model Kits</a>
+  
+    </nav>
+  </header>
+
+  <main class="hero">
+
+    <section class="hero-text">
+      <h1>Bienvenido al <span>Inventario Gundam</span></h1>
+
+      <p>
+        Administra tu colección de Gunpla y Model Kits inspirados en el universo Gundam.
+        Controla stock, precios, escalas y grados desde una interfaz inspirada en el legendario RX-78-2.
+      </p>
+
+      <div class="buttons">
+        <a href="{% url 'modelkit_list' %}" class="btn btn-primary">Ver Inventario</a>
+
+        <a href="{% url 'agregar_modelkit' %}" class="btn btn-secondary">Agregar Model Kit</a>
+      </div>
+    </section>
+
+    <section class="hero-image">
+      <div class="gundam-card">
+        <h2 class="rx-title">RX-78-2</h2>
+
+        <div class="rx-specs">
+          <p><strong>Serie:</strong> Mobile Suit Gundam</p>
+          <p><strong>Escala:</strong> 1/144</p>
+          <p><strong>Grado:</strong> HG / RG / MG</p>
+          <p><strong>Estado:</strong> Inventario Activo</p>
+          <p><strong>Core Colors:</strong></p>
+          <p>Azul • Rojo • Blanco • Amarillo</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Inventario Model Kit Gundam - Proyecto Django + Python</p>
+  </footer>
+
+</body>
+</html>

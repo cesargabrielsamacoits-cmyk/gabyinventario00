@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Model Kits</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+         .navbar{
+    width:100%;
+    margin-bottom:40px;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background-color:rgba(0,0,0,0.25);
+    backdrop-filter:blur(10px);
+    border-radius:18px;
+    border-bottom:3px solid #f1c40f;
+    box-shadow:0 0 20px rgba(0,0,0,0.25);
+}
+
+.logo{
+    font-family:'Orbitron', sans-serif;
+    font-size:1.7rem;
+    font-weight:700;
+    letter-spacing:2px;
+    color:white;
+}
+
+.logo span{
+    color:#e63946;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:0.3s ease;
+}
+
+.nav-links a:hover{
+    color:#f1c40f;
+    transform:translateY(-2px);
+}
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Roboto', sans-serif;
+            background: linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            min-height:100vh;
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1400px;
+            margin:auto;
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:3rem;
+            margin-bottom:15px;
+            color:#ffffff;
+        }
+
+        .title span{
+            color:#f1c40f;
+        }
+
+        .subtitle{
+            color:#dfe6e9;
+            margin-bottom:35px;
+            font-size:1.1rem;
+        }
+
+        .table-container{
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(14px);
+            border-radius:24px;
+            padding:25px;
+            border:2px solid rgba(255,255,255,0.1);
+            overflow-x:auto;
+            box-shadow:0 0 30px rgba(0,0,0,0.35);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:1200px;
+        }
+
+        thead{
+            background-color:rgba(230,57,70,0.9);
+        }
+
+        th{
+            padding:18px;
+            text-align:left;
+            font-family:'Orbitron', sans-serif;
+            font-size:0.95rem;
+            letter-spacing:1px;
+            color:white;
+        }
+
+        td{
+            padding:18px;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            color:#ecf0f1;
+        }
+
+        tbody tr{
+            transition:0.3s ease;
+        }
+
+        tbody tr:hover{
+            background-color:rgba(241,196,15,0.12);
+            transform:scale(1.005);
+        }
+
+        .grado{
+            padding:6px 12px;
+            border-radius:12px;
+            font-weight:bold;
+            font-size:0.9rem;
+            display:inline-block;
+        }
+
+        .hg{
+            background:#3498db;
+        }
+
+        .rg{
+            background:#e63946;
+        }
+
+        .mg{
+            background:#f1c40f;
+            color:#0d1b2a;
+        }
+
+        .pg{
+            background:#ecf0f1;
+            color:#0d1b2a;
+        }
+
+        .stock{
+            font-weight:bold;
+        }
+
+        .stock-low{
+            color:#ff7675;
+        }
+
+        .stock-ok{
+            color:#55efc4;
+        }
+
+        .btn{
+            padding:10px 16px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:0.3s ease;
+        }
+
+        .btn-edit{
+            background:#f1c40f;
+            color:#0d1b2a;
+        }
+
+        .btn-delete{
+            background:#e63946;
+            color:white;
+        }
+
+        .btn:hover{
+            transform:translateY(-2px);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .title{
+                font-size:2rem;
+            }
+
+        }
+
+    </style>
+
+   
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            RX-78 <span>MODEL KIT</span>
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="/">Inicio</a>
+
+            <a href="/modelkits/agregar/">
+                Agregar Model Kit
+            </a>
+
+            <a href="/admin/">
+                Admin
+            </a>
+
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <h1 class="title">
+            Inventario <span>Model Kits</span>
+        </h1>
+
+        <p class="subtitle">
+            Administración de Gunplas inspirada en el RX-78-2 Gundam
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Grado</th>
+                        <th>Escala</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Ingreso</th>
+                        <th>Modificación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for kit in modelkits %}
+
+                    <tr>
+
+                        <td>
+                            <a 
+                                href="{% url 'modelkit_detail_view' kit.slug %}"
+                                style="color:#ffffff; text-decoration:none; font-weight:bold;"
+                            >
+                                {{ kit.nombre }}
+                            </a>
+                        </td>
+
+                        <td>{{ kit.descripcion }}</td>
+
+                        <td>
+
+                            <span class="grado {{ kit.grado|lower }}">
+                                {{ kit.grado }}
+                            </span>
+
+                        </td>
+
+                        <td>{{ kit.escala }}</td>
+
+                        <td>${{ kit.precio }}</td>
+
+                        <td>
+
+                            {% if kit.cantidad < 5 %}
+                                <span class="stock stock-low">
+                                    {{ kit.cantidad }}
+                                </span>
+                            {% else %}
+                                <span class="stock stock-ok">
+                                    {{ kit.cantidad }}
+                                </span>
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ kit.fecha_de_ingreso }}</td>
+
+                        <td>{{ kit.fecha_de_modificacion }}</td>
+
+                        <td>
+
+                            <a href="{% url 'modelkit_update_view' kit.slug %}">
+
+                                <button class="btn btn-edit">
+                                    Editar
+                                </button>
+
+                            </a>
+
+                            <button class="btn btn-delete">
+                                Eliminar
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ modelkit.nombre }} | RX-78 Inventory</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+body{
+    font-family:'Roboto', sans-serif;
+    background: linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+    min-height:100vh;
+    color:white;
+    padding:40px;
+}
+        }
+
+        .container{
+            max-width:1100px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #f1c40f;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#f1c40f;
+            transform:translateY(-2px);
+        }
+
+        /* CARD */
+
+        .detail-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:50px;
+            border:1px solid rgba(255,255,255,0.12);
+            box-shadow:0 0 25px rgba(0,0,0,0.35);
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:3rem;
+            margin-bottom:10px;
+            color:#f1c40f;
+        }
+
+        .subtitle{
+            color:#dcdcdc;
+            margin-bottom:35px;
+            font-size:1.1rem;
+        }
+
+        .info-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+            gap:25px;
+            margin-bottom:35px;
+        }
+
+        .info-box{
+            background:rgba(0,0,0,0.25);
+            padding:25px;
+            border-radius:18px;
+            border-left:5px solid #e63946;
+            transition:0.3s;
+        }
+
+        .info-box:hover{
+            transform:translateY(-5px);
+            box-shadow:0 0 15px rgba(241,196,15,0.2);
+        }
+
+        .info-label{
+            font-size:0.9rem;
+            color:#f1c40f;
+            margin-bottom:8px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .info-value{
+            font-size:1.1rem;
+            font-weight:500;
+        }
+
+        .description{
+            background:rgba(0,0,0,0.22);
+            padding:30px;
+            border-radius:20px;
+            line-height:1.8;
+            margin-bottom:35px;
+        }
+
+        .description h2{
+            color:#f1c40f;
+            margin-bottom:15px;
+            font-family:'Orbitron', sans-serif;
+        }
+
+        .buttons{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:14px 28px;
+            border:none;
+            border-radius:14px;
+            text-decoration:none;
+            color:white;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .btn-primary{
+            background:#e63946;
+        }
+
+        .btn-primary:hover{
+            background:#ff4d5d;
+            transform:translateY(-2px);
+        }
+
+        .btn-secondary{
+            background:#1d3557;
+        }
+
+        .btn-secondary:hover{
+            background:#274c77;
+            transform:translateY(-2px);
+        }
+
+        .stock-low{
+            color:#ff7675;
+            font-weight:bold;
+        }
+
+        .stock-ok{
+            color:#55efc4;
+            font-weight:bold;
+        }
+        .action-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+}
+
+.action-buttons a{
+    text-decoration:none;
+}
+
+.btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s ease;
+    font-size:0.95rem;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn-edit{
+    background:#f1c40f;
+    color:#0d1b2a;
+    box-shadow:0 0 12px rgba(241,196,15,0.25);
+}
+
+.btn-edit:hover{
+    box-shadow:0 0 18px rgba(241,196,15,0.6);
+}
+
+.btn-back{
+    background:#3498db;
+    color:white;
+    box-shadow:0 0 12px rgba(52,152,219,0.25);
+}
+
+.btn-back:hover{
+    box-shadow:0 0 18px rgba(52,152,219,0.6);
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+        <div class="logo">
+            RX-78 <span>MODEL KIT</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'modelkit_list' %}">Inventario</a>
+            <a href="/admin/">Admin</a>
+        </div>
+    </div>
+
+    <!-- DETAIL -->
+
+    <div class="detail-card">
+
+        <h1 class="title">{{ modelkit.nombre }}</h1>
+
+        <p class="subtitle">
+            Detalle completo del Gunpla registrado en el inventario.
+        </p>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                <div class="info-label">Grado</div>
+                <div class="info-value">{{ modelkit.grado }}</div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Escala</div>
+                <div class="info-value">{{ modelkit.escala }}</div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Precio</div>
+                <div class="info-value">${{ modelkit.precio }}</div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Stock</div>
+
+                <div class="info-value">
+                    {% if modelkit.cantidad <= 3 %}
+                        <span class="stock-low">
+                            {{ modelkit.cantidad }} unidades
+                        </span>
+                    {% else %}
+                        <span class="stock-ok">
+                            {{ modelkit.cantidad }} unidades
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Fecha de ingreso</div>
+                <div class="info-value">
+                    {{ modelkit.fecha_de_ingreso|date:"d/m/Y H:i" }}
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-label">Última modificación</div>
+                <div class="info-value">
+                    {{ modelkit.fecha_de_modificacion|date:"d/m/Y H:i" }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="description">
+            <h2>Descripción</h2>
+
+            <p>
+                {{ modelkit.descripcion }}
+            </p>
+        </div>
+
+<div class="action-buttons">
+
+    <a href="{% url 'modelkit_list' %}" class="btn btn-back">
+        ← Volver al inventario
+    </a>
+
+    <a href="{% url 'agregar_modelkit' %}" class="btn btn-primary">
+        + Agregar nuevo kit
+    </a>
+
+    <a href="{% url 'modelkit_update_view' modelkit.slug %}" class="btn btn-edit">
+        ✏ Editar Model Kit
+    </a>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
