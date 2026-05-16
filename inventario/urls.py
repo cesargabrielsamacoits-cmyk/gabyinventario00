@@ -10,7 +10,12 @@ urlpatterns = [
     path(
     'modelkits/<slug:slug>/editar/',
     ModelKitUpdateView.as_view(),
-    name='modelkit_update_view'
+    name='modelkit_update_view',
+),
+    path(
+    'modelkits/<slug:slug>/eliminar/',
+    ModelKitDeleteView.as_view(),
+    name='modelkit_delete_view',
 ),
 ]
 

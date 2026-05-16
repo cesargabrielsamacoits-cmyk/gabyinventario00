@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar {{ modelkit.nombre }}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Roboto', sans-serif;
+            background: linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            min-height:100vh;
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #f1c40f;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#f1c40f;
+            transform:translateY(-2px);
+        }
+
+        /* DELETE CARD */
+
+        .delete-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:50px;
+            border:1px solid rgba(255,255,255,0.12);
+            box-shadow:0 0 25px rgba(0,0,0,0.35);
+            text-align:center;
+        }
+
+        .warning-icon{
+            font-size:5rem;
+            margin-bottom:20px;
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:2.5rem;
+            margin-bottom:20px;
+            color:#e63946;
+        }
+
+        .message{
+            font-size:1.1rem;
+            color:#dfe6e9;
+            line-height:1.7;
+            margin-bottom:40px;
+        }
+
+        .kit-name{
+            color:#f1c40f;
+            font-weight:bold;
+        }
+
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:14px 28px;
+            border:none;
+            border-radius:14px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s ease;
+            font-size:1rem;
+            text-decoration:none;
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        .btn-delete{
+            background:#e63946;
+            color:white;
+            box-shadow:0 0 15px rgba(230,57,70,0.3);
+        }
+
+        .btn-delete:hover{
+            box-shadow:0 0 22px rgba(230,57,70,0.6);
+        }
+
+        .btn-cancel{
+            background:#3498db;
+            color:white;
+            box-shadow:0 0 15px rgba(52,152,219,0.3);
+        }
+
+        .btn-cancel:hover{
+            box-shadow:0 0 22px rgba(52,152,219,0.6);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .delete-card{
+                padding:35px 25px;
+            }
+
+            .title{
+                font-size:2rem;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+
+        <header class="navbar">
+
+            <div class="logo">
+                RX-78 <span>MODEL KIT</span>
+            </div>
+
+            <nav class="nav-links">
+
+                <a href="{% url 'index' %}">
+                    Inicio
+                </a>
+
+                <a href="{% url 'modelkit_list' %}">
+                    Inventario
+                </a>
+
+                <a href="/admin/">
+                    Admin
+                </a>
+
+            </nav>
+
+        </header>
+
+        <!-- DELETE CONFIRM -->
+
+        <div class="delete-card">
+
+            <div class="warning-icon">
+                ⚠
+            </div>
+
+            <h1 class="title">
+                Confirmar Eliminación
+            </h1>
+
+            <p class="message">
+
+                Estás a punto de eliminar el Model Kit:
+
+                <span class="kit-name">
+                    {{ modelkit.nombre }}
+                </span>
+
+                <br><br>
+
+                Esta acción no se puede deshacer.
+
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="buttons">
+
+                    <button type="submit" class="btn btn-delete">
+                        🗑 Eliminar definitivamente
+                    </button>
+
+                    <a 
+                        href="{% url 'modelkit_detail_view' modelkit.slug %}"
+                        class="btn btn-cancel"
+                    >
+                        ← Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

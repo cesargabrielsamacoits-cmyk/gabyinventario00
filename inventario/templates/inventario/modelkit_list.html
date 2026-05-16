@@ -225,7 +225,9 @@
             <a href="/modelkits/agregar/">
                 Agregar Model Kit
             </a>
-
+            <a href="/actionbases/">
+                Action Bases
+            </a>
             <a href="/admin/">
                 Admin
             </a>
@@ -318,6 +320,8 @@
                                 </button>
 
                             </a>
+                            
+                            <a href="{% url 'modelkit_delete_view' kit.slug %}">
 
                             <button class="btn btn-delete">
                                 Eliminar

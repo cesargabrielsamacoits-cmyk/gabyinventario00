@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Bases | RX-78 Inventory</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Roboto', sans-serif;
+            background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            min-height:100vh;
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1400px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #f1c40f;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#f1c40f;
+            transform:translateY(-2px);
+        }
+
+        /* TITULOS */
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:3rem;
+            margin-bottom:15px;
+            color:#ffffff;
+        }
+
+        .title span{
+            color:#3498db;
+        }
+
+        .subtitle{
+            color:#dfe6e9;
+            margin-bottom:35px;
+            font-size:1.1rem;
+        }
+
+        /* TABLA */
+
+        .table-container{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:25px;
+            border:2px solid rgba(255,255,255,0.1);
+            overflow-x:auto;
+            box-shadow:0 0 30px rgba(0,0,0,0.35);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            min-width:1100px;
+        }
+
+        thead{
+            background-color:rgba(52,152,219,0.9);
+        }
+
+        th{
+            padding:18px;
+            text-align:left;
+            font-family:'Orbitron', sans-serif;
+            font-size:0.95rem;
+            letter-spacing:1px;
+            color:white;
+        }
+
+        td{
+            padding:18px;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            color:#ecf0f1;
+        }
+
+        tbody tr{
+            transition:0.3s ease;
+        }
+
+        tbody tr:hover{
+            background-color:rgba(52,152,219,0.12);
+            transform:scale(1.005);
+        }
+
+        /* STOCK */
+
+        .stock{
+            font-weight:bold;
+        }
+
+        .stock-low{
+            color:#ff7675;
+        }
+
+        .stock-ok{
+            color:#55efc4;
+        }
+
+        /* BOTONES */
+
+        .actions{
+            display:flex;
+            gap:12px;
+        }
+
+        .btn{
+            padding:10px 16px;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:0.3s ease;
+            text-decoration:none;
+            display:inline-block;
+        }
+
+        .btn:hover{
+            transform:translateY(-2px);
+        }
+
+        .btn-detail{
+            background:#3498db;
+            color:white;
+        }
+
+        .btn-edit{
+            background:#f1c40f;
+            color:#0d1b2a;
+        }
+
+        .btn-delete{
+            background:#e63946;
+            color:white;
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .title{
+                font-size:2rem;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:20px;
+                text-align:center;
+            }
+
+            .nav-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+
+        <header class="navbar">
+
+            <div class="logo">
+                RX-78 <span>ACTION BASES</span>
+            </div>
+
+            <nav class="nav-links">
+
+                <a href="{% url 'index' %}">
+                    Inicio
+                </a>
+
+                <a href="{% url 'modelkit_list' %}">
+                    Model Kits
+                </a>
+                <a href="{% url 'base_create' %}">
+                    Crear Base
+                </a>
+                <a href="/admin/">
+                    Admin
+                </a>
+
+            </nav>
+
+        </header>
+
+        <!-- TITULO -->
+
+        <h1 class="title">
+            Inventario <span>Action Bases</span>
+        </h1>
+
+        <p class="subtitle">
+            Administración de bases de soporte para Gunplas y displays.
+        </p>
+
+        <!-- TABLA -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Creación</th>
+                        <th>Actualización</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for base in bases %}
+
+                    <tr>
+
+                        <td>{{ base.nombre }}</td>
+
+                        <td>{{ base.descripcion }}</td>
+
+                        <td>${{ base.precio }}</td>
+
+                        <td>
+
+                            {% if base.cantidad < 5 %}
+
+                                <span class="stock stock-low">
+                                    {{ base.cantidad }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="stock stock-ok">
+                                    {{ base.cantidad }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ base.fecha_creacion|date:"d/m/Y H:i" }}
+                        </td>
+
+                        <td>
+                            {{ base.fecha_actualizacion|date:"d/m/Y H:i" }}
+                        </td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <a href="{% url 'base_detail_view' base.slug %}" class="btn btn-detail">
+                                    Ver
+                                </a>
+
+                                <a href="{% url 'base_update_view' base.slug %}" class="btn btn-edit">
+                                    Editar
+                                </a>
+
+                                <a href="{% url 'base_delete_view' base.slug %}" class="btn btn-delete">
+                                    Eliminar
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="8" style="text-align:center; padding:30px;">
+
+                            No hay Action Bases registradas.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

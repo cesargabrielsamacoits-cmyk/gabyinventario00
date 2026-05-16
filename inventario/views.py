@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 #from django.http import HttpResponse
 from inventario.models import ModelKit
 from inventario.forms import ModelKitForm
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView , DeleteView
 from django.urls import reverse_lazy
 
 
@@ -65,3 +65,10 @@ class ModelKitUpdateView(UpdateView):
         )
 
 
+class ModelKitDeleteView(DeleteView):
+    model = ModelKit
+    template_name = "inventario/modelkit_confirm_delete.html"
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+    success_url = reverse_lazy('modelkit_list')
+    

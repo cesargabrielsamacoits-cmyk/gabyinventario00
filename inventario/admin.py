@@ -1,6 +1,6 @@
 from django.contrib import admin
 #from .models import ModelKit
-from inventario.models import ModelKit
+from inventario.models import ModelKit  
 
 #admin.site.register(ModelKit)
 

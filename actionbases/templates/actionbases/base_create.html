@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Action Base | RX-78 Inventory</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            font-family:'Roboto', sans-serif;
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #3498db;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#3498db;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#3498db;
+            transform:translateY(-2px);
+        }
+
+        /* CARD */
+
+        .form-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:45px;
+            border:2px solid rgba(255,255,255,0.1);
+            box-shadow:0 0 30px rgba(0,0,0,0.35);
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:2.7rem;
+            margin-bottom:15px;
+            color:white;
+        }
+
+        .title span{
+            color:#3498db;
+        }
+
+        .subtitle{
+            color:#dfe6e9;
+            margin-bottom:35px;
+            font-size:1.05rem;
+        }
+
+        /* FORMULARIO */
+
+        .form-group{
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:10px;
+            font-weight:600;
+            color:#ecf0f1;
+            letter-spacing:0.5px;
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:14px;
+            background:rgba(255,255,255,0.12);
+            color:white;
+            font-size:1rem;
+            outline:none;
+            transition:0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus{
+            border:1px solid #3498db;
+            box-shadow:0 0 15px rgba(52,152,219,0.3);
+        }
+
+        textarea{
+            resize:vertical;
+            min-height:120px;
+        }
+
+        select option{
+            background:#1b263b;
+            color:white;
+        }
+
+        /* BOTONES */
+
+        .button-group{
+            margin-top:35px;
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:14px 24px;
+            border:none;
+            border-radius:14px;
+            text-decoration:none;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s ease;
+            font-size:1rem;
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        .btn-save{
+            background:#3498db;
+            color:white;
+            box-shadow:0 0 15px rgba(52,152,219,0.25);
+        }
+
+        .btn-save:hover{
+            box-shadow:0 0 20px rgba(52,152,219,0.5);
+        }
+
+        .btn-cancel{
+            background:#e63946;
+            color:white;
+            box-shadow:0 0 15px rgba(230,57,70,0.25);
+        }
+
+        .btn-cancel:hover{
+            box-shadow:0 0 20px rgba(230,57,70,0.5);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:20px;
+                text-align:center;
+            }
+
+            .nav-links{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+
+            .title{
+                font-size:2rem;
+            }
+
+            .form-card{
+                padding:30px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+
+        <header class="navbar">
+
+            <div class="logo">
+                RX-78 <span>ACTION BASES</span>
+            </div>
+
+            <nav class="nav-links">
+
+                <a href="{% url 'index' %}">
+                    Inicio
+                </a>
+
+                <a href="{% url 'base_list' %}">
+                    Action Bases
+                </a>
+
+                <a href="{% url 'modelkit_list' %}">
+                    Model Kits
+                </a>
+
+                <a href="/admin/">
+                    Admin
+                </a>
+
+            </nav>
+
+        </header>
+
+        <!-- FORM -->
+
+        <div class="form-card">
+
+            <h1 class="title">
+                Agregar <span>Action Base</span>
+            </h1>
+
+            <p class="subtitle">
+                Registra una nueva base de soporte para tu colección Gunpla.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.nombre.id_for_label }}">
+                        Nombre
+                    </label>
+
+                    {{ form.nombre }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.descripcion.id_for_label }}">
+                        Descripción
+                    </label>
+
+                    {{ form.descripcion }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.tipo.id_for_label }}">
+                        Tipo
+                    </label>
+
+                    {{ form.tipo }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.precio.id_for_label }}">
+                        Precio
+                    </label>
+
+                    {{ form.precio }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.cantidad.id_for_label }}">
+                        Cantidad
+                    </label>
+
+                    {{ form.cantidad }}
+                </div>
+
+                <div class="button-group">
+
+                    <button type="submit" class="btn btn-save">
+                        Guardar Action Base
+                    </button>
+
+                    <a href="{% url 'base_list' %}" class="btn btn-cancel">
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

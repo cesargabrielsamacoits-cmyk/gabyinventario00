@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerrar Sesión | RX-78 Inventory</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            font-family:'Roboto', sans-serif;
+            color:white;
+            padding:30px;
+        }
+
+        .logout-container{
+            width:100%;
+            max-width:600px;
+        }
+
+        /* CARD */
+
+        .logout-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:50px;
+            border:1px solid rgba(255,255,255,0.12);
+            box-shadow:0 0 30px rgba(0,0,0,0.35);
+            text-align:center;
+        }
+
+        /* LOGO */
+
+        .logo{
+            margin-bottom:30px;
+            font-family:'Orbitron', sans-serif;
+            font-size:2rem;
+            font-weight:700;
+            letter-spacing:2px;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        /* ICON */
+
+        .icon{
+            font-size:5rem;
+            margin-bottom:20px;
+        }
+
+        /* TITLES */
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:2.3rem;
+            color:#f1c40f;
+            margin-bottom:15px;
+        }
+
+        .subtitle{
+            color:#dfe6e9;
+            font-size:1.1rem;
+            line-height:1.7;
+            margin-bottom:40px;
+        }
+
+        /* BUTTONS */
+
+        .buttons{
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            padding:14px 28px;
+            border:none;
+            border-radius:14px;
+            font-weight:bold;
+            font-size:1rem;
+            cursor:pointer;
+            transition:0.3s ease;
+            text-decoration:none;
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        .btn-logout{
+            background:#e63946;
+            color:white;
+            box-shadow:0 0 18px rgba(230,57,70,0.35);
+        }
+
+        .btn-logout:hover{
+            box-shadow:0 0 24px rgba(230,57,70,0.7);
+        }
+
+        .btn-cancel{
+            background:#1d3557;
+            color:white;
+            box-shadow:0 0 18px rgba(29,53,87,0.35);
+        }
+
+        .btn-cancel:hover{
+            box-shadow:0 0 24px rgba(52,152,219,0.6);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .logout-card{
+                padding:35px 25px;
+            }
+
+            .title{
+                font-size:1.8rem;
+            }
+
+            .buttons{
+                flex-direction:column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="logout-container">
+
+        <div class="logout-card">
+
+            <div class="logo">
+                RX-78 <span>MODEL KIT</span>
+            </div>
+
+            <div class="icon">
+                ⚠
+            </div>
+
+            <h1 class="title">
+                Confirmar Cierre de Sesión
+            </h1>
+
+            <p class="subtitle">
+                ¿Estás seguro de que deseas cerrar sesión?
+                <br><br>
+                Tendrás que volver a iniciar sesión para acceder al sistema.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="buttons">
+
+                    <button type="submit" class="btn btn-logout">
+                        🔒 Cerrar Sesión
+                    </button>
+
+                    <a href="/" class="btn btn-cancel">
+                        ← Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

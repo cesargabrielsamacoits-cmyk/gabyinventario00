@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | RX-78 Inventory</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            font-family:'Roboto', sans-serif;
+            background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);
+            color:white;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1100px;
+            margin:auto;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:100%;
+            margin-bottom:40px;
+            padding:20px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background-color:rgba(0,0,0,0.25);
+            backdrop-filter:blur(10px);
+            border-radius:18px;
+            border-bottom:3px solid #f1c40f;
+            box-shadow:0 0 20px rgba(0,0,0,0.25);
+        }
+
+        .logo{
+            font-family:'Orbitron', sans-serif;
+            font-size:1.7rem;
+            font-weight:700;
+            letter-spacing:2px;
+            color:white;
+        }
+
+        .logo span{
+            color:#e63946;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:25px;
+        }
+
+        .nav-links a{
+            text-decoration:none;
+            color:white;
+            font-weight:500;
+            transition:0.3s ease;
+        }
+
+        .nav-links a:hover{
+            color:#f1c40f;
+            transform:translateY(-2px);
+        }
+
+        /* CARD */
+
+        .profile-card{
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(14px);
+            border-radius:24px;
+            padding:50px;
+            border:1px solid rgba(255,255,255,0.12);
+            box-shadow:0 0 25px rgba(0,0,0,0.35);
+        }
+
+        .title{
+            font-family:'Orbitron', sans-serif;
+            font-size:3rem;
+            margin-bottom:10px;
+            color:#f1c40f;
+        }
+
+        .subtitle{
+            color:#dcdcdc;
+            margin-bottom:40px;
+            font-size:1.1rem;
+        }
+
+        .info-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+            margin-bottom:40px;
+        }
+
+        .info-box{
+            background:rgba(0,0,0,0.25);
+            padding:25px;
+            border-radius:18px;
+            border-left:5px solid #e63946;
+            transition:0.3s ease;
+        }
+
+        .info-box:hover{
+            transform:translateY(-5px);
+            box-shadow:0 0 15px rgba(241,196,15,0.2);
+        }
+
+        .info-label{
+            font-size:0.9rem;
+            color:#f1c40f;
+            margin-bottom:8px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .info-value{
+            font-size:1.15rem;
+            font-weight:500;
+        }
+
+        /* ACTIONS */
+
+        .action-buttons{
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            margin-top:20px;
+        }
+
+        .action-buttons a{
+            text-decoration:none;
+        }
+
+        .btn{
+            padding:14px 26px;
+            border:none;
+            border-radius:14px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s ease;
+            font-size:0.95rem;
+        }
+
+        .btn:hover{
+            transform:translateY(-3px);
+        }
+
+        .btn-password{
+            background:#f1c40f;
+            color:#0d1b2a;
+            box-shadow:0 0 12px rgba(241,196,15,0.25);
+        }
+
+        .btn-password:hover{
+            box-shadow:0 0 18px rgba(241,196,15,0.55);
+        }
+
+        .btn-logout{
+            background:#e63946;
+            color:white;
+            box-shadow:0 0 12px rgba(230,57,70,0.25);
+        }
+
+        .btn-logout:hover{
+            box-shadow:0 0 18px rgba(230,57,70,0.55);
+        }
+
+        .btn-home{
+            background:#3498db;
+            color:white;
+            box-shadow:0 0 12px rgba(52,152,219,0.25);
+        }
+
+        .btn-home:hover{
+            box-shadow:0 0 18px rgba(52,152,219,0.55);
+        }
+
+        @media(max-width:768px){
+
+            body{
+                padding:20px;
+            }
+
+            .navbar{
+                flex-direction:column;
+                gap:20px;
+                text-align:center;
+            }
+
+            .title{
+                font-size:2.2rem;
+            }
+
+            .action-buttons{
+                flex-direction:column;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            RX-78 <span>MODEL KIT</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'modelkit_list' %}">Model Kits</a>
+            <a href="{% url 'base_list' %}">Action Bases</a>
+        </div>
+
+    </div>
+
+    <!-- PROFILE CARD -->
+
+    <div class="profile-card">
+
+        <h1 class="title">
+            Perfil de Usuario
+        </h1>
+
+        <p class="subtitle">
+            Información general de la cuenta y accesos rápidos.
+        </p>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    Usuario
+                </div>
+
+                <div class="info-value">
+                    {{ request.user.username }}
+                </div>
+
+            </div>
+
+
+
+            <div class="info-box">
+
+                <div class="info-label">
+                    Último acceso
+                </div>
+
+                <div class="info-value">
+                    {{ request.user.last_login|date:"d/m/Y H:i" }}
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="action-buttons">
+
+            <a href="{% url 'usuarios:cambiar_contrasena' %}">
+                <button class="btn btn-password">
+                    🔒 Cambiar Contraseña
+                </button>
+            </a>
+
+            <a href="{% url 'usuarios:cerrar_sesion' %}">
+                <button class="btn btn-logout">
+                    ⛔ Cerrar Sesión
+                </button>
+            </a>
+
+            <a href="{% url 'index' %}">
+                <button class="btn btn-home">
+                    🏠 Volver al Inicio
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
