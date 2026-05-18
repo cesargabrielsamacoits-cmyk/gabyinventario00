@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import iniciar_sesion, cerrar_sesion , registro , perfil, CambiarContrasenaView
+from .views import iniciar_sesion, cerrar_sesion , registro , perfil, CambiarContrasenaView, editar_perfil
 #from django.contrib.auth.views import LogoutView
 
 app_name = 'usuarios'
@@ -13,5 +13,10 @@ urlpatterns = [
     'cambiar-contrasena/',
     CambiarContrasenaView.as_view(),
     name='cambiar_contrasena'
+),
+    path(
+    'editar-perfil/',
+    editar_perfil,
+    name='editar_perfil'
 ),
 ]

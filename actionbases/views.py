@@ -3,8 +3,10 @@ from actionbases.models import ActionBase
 from actionbases.forms import ActionBaseForm
 from django.views.generic import DetailView, UpdateView , DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+@login_required
 def base_list(request):
     bases_q = ActionBase.objects.all()
 
@@ -14,6 +16,8 @@ def base_list(request):
         {"bases": bases_q}
     )
 
+
+@login_required
 def base_create(request):
     if request.method == "POST":
         form = ActionBaseForm(request.POST)
@@ -29,7 +33,7 @@ def base_create(request):
         {"form": form}
     )
     
-class ActionBaseDetailView(DetailView):
+class ActionBaseDetailView(LoginRequiredMixin, DetailView):
     model = ActionBase
     template_name = "actionbases/base_detail_view.html"
     context_object_name = "base"
@@ -37,7 +41,7 @@ class ActionBaseDetailView(DetailView):
     slug_url_kwarg = "slug"
 
 
-class ActionBaseUpdateView(UpdateView):
+class ActionBaseUpdateView(LoginRequiredMixin, UpdateView):
     model = ActionBase
     fields = ['nombre', 'descripcion', 'precio', 'cantidad']
     template_name = "actionbases/base_create.html"
@@ -52,7 +56,7 @@ class ActionBaseUpdateView(UpdateView):
         )
 
 
-class ActionBaseDeleteView(DeleteView):
+class ActionBaseDeleteView(LoginRequiredMixin, DeleteView):
     model = ActionBase
     template_name = "actionbases/base_confirm_delete.html"
 

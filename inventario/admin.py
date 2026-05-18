@@ -1,6 +1,7 @@
 from django.contrib import admin
 #from .models import ModelKit
 from inventario.models import ModelKit  
+from actionbases.models import ActionBase
 
 #admin.site.register(ModelKit)
 
@@ -17,3 +18,8 @@ class ModelKitAdmin(admin.ModelAdmin):
     
     readonly_fields = ('fecha_de_ingreso', 'fecha_de_modificacion')
     
+@admin.register(ActionBase)
+class ActionBaseAdmin(admin.ModelAdmin):
+    ordering = ['nombre']
+    list_display = ['nombre', 'slug']
+    list_filter = ['nombre']

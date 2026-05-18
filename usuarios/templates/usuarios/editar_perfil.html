@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .edit-container{
+            width: 100%;
+            max-width: 750px;
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 24px;
+            padding: 45px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 35px rgba(0, 255, 255, 0.12);
+        }
+
+        .title{
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title h1{
+            font-size: 2.4rem;
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .title p{
+            color: #cbd5e1;
+            font-size: 1rem;
+        }
+
+        .form-group{
+            margin-bottom: 24px;
+        }
+
+        .form-group label{
+            display: block;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control{
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus{
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+        }
+
+        .errorlist{
+            margin-top: 8px;
+            list-style: none;
+            color: #f87171;
+            font-size: 0.9rem;
+            padding-left: 0;
+        }
+
+        .buttons{
+            display: flex;
+            gap: 16px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .btn{
+            flex: 1;
+            min-width: 200px;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-save{
+            background: linear-gradient(135deg, #06b6d4, #2563eb);
+            color: white;
+        }
+
+        .btn-save:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
+        }
+
+        .btn-back{
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 1px solid #475569;
+        }
+
+        .btn-back:hover{
+            background: #334155;
+        }
+
+        @media(max-width: 700px){
+
+            .edit-container{
+                padding: 30px 22px;
+            }
+
+            .title h1{
+                font-size: 2rem;
+            }
+
+            .buttons{
+                flex-direction: column;
+            }
+
+            .btn{
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="edit-container">
+
+        <div class="title">
+            <h1>Editar Perfil</h1>
+            <p>Actualiza tu información personal</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% for field in formulario %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.errors %}
+                        {{ field.errors }}
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <div class="buttons">
+
+                <button type="submit" class="btn btn-save">
+                    Guardar Cambios
+                </button>
+
+                <a href="{% url 'usuarios:perfil' %}" class="btn btn-back">
+                    Volver al Perfil
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import login, logout
-from .forms import FormularioRegistro , FormularioCambioContrasena
+from .forms import FormularioRegistro, FormularioCambioContrasena, FormularioEdicionPerfil
 from django.urls import reverse_lazy
 
 def iniciar_sesion(request):
@@ -43,6 +44,7 @@ def registro(request):
     return render(request, 'usuarios/registro.html', {'formulario': FormularioRegistro()})
 
 
+@login_required
 def perfil(request):
     return render(request, 'usuarios/perfil.html')
 
@@ -51,3 +53,31 @@ class CambiarContrasenaView(PasswordChangeView):
     template_name = 'usuarios/cambiar_contrasena.html'
     success_url = reverse_lazy('usuarios:perfil')
     form_class = FormularioCambioContrasena
+
+
+@login_required
+def editar_perfil(request):
+
+    if request.method == 'POST':
+
+        formulario = FormularioEdicionPerfil(
+            request.POST,
+            instance=request.user
+        )
+
+        if formulario.is_valid():
+            formulario.save()
+
+            return redirect('usuarios:perfil')
+
+    else:
+
+        formulario = FormularioEdicionPerfil(
+            instance=request.user
+        )
+
+    return render(
+        request,
+        'usuarios/editar_perfil.html',
+        {'formulario': formulario}
+    )

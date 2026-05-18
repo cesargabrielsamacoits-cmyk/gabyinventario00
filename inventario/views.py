@@ -4,17 +4,20 @@ from inventario.models import ModelKit
 from inventario.forms import ModelKitForm
 from django.views.generic import ListView, DetailView, UpdateView , DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
     return render(request, "inventario/index.html")
     #return HttpResponse("Funciona!")
 
-
+@login_required
 def modelkit_list(request):
     modelkits_q = ModelKit.objects.all() #es una consulta a la base de datos para obtener todos los objetos de la clase ModelKit
     return render(request, "inventario/modelkit_list.html", {"modelkits": modelkits_q})
 
+@login_required
 def agregar_modelkit(request):
     if request.method == "POST":
         form = ModelKitForm(request.POST)
@@ -28,21 +31,21 @@ def agregar_modelkit(request):
 
 
 
-class ModelKitListView(ListView):
+class ModelKitListView(LoginRequiredMixin, ListView):
     model = ModelKit
     template_name = "inventario/modelkit_list.html"
     context_object_name = "modelkits"
     
-    
-class ModelKitDetailView(DetailView):
+  
+class ModelKitDetailView(LoginRequiredMixin, DetailView):
     model = ModelKit
     template_name = "inventario/modelkit_detail_view.html"
     context_object_name = "modelkit"
     slug_field = "slug"
     slug_url_kwarg = "slug"
     
-    
-class ModelKitUpdateView(UpdateView):
+   
+class ModelKitUpdateView(LoginRequiredMixin, UpdateView):
     model = ModelKit
     fields = [
         'nombre',
@@ -64,8 +67,8 @@ class ModelKitUpdateView(UpdateView):
             kwargs={'slug': self.object.slug}
         )
 
-
-class ModelKitDeleteView(DeleteView):
+ 
+class ModelKitDeleteView(LoginRequiredMixin, DeleteView):
     model = ModelKit
     template_name = "inventario/modelkit_confirm_delete.html"
     slug_field = "slug"
